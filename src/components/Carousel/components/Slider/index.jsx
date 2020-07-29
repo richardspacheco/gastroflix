@@ -21,10 +21,19 @@ const Container = styled.ul`
   }
   
   .slick-prev {
-    left: 0;
+    left: 16px;
+
+    &:before {
+      color: ${props => props.color};
+    }
   }
+
   .slick-next {
     right: 16px;
+
+    &:before {
+      color: ${props => props.color};
+    }
   }
 `;
 
@@ -32,22 +41,17 @@ export const SliderItem = styled.li`
   margin-right: 16px;
   img {
     margin: 16px;
-    width: 298px;
-    height: 197px;
     object-fit: cover;
   }
 `;
 
-
-const Slider = ({ children }) => (
-  <Container>
+const Slider = ({ categoryColor, children }) => (
+  <Container color={categoryColor}>
     <SlickSlider {...{
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 300,
-      centerMode: false,
       variableWidth: true,
-      adaptiveHeight: true,
     }}
     >
       {children}
@@ -55,4 +59,4 @@ const Slider = ({ children }) => (
   </Container>
 );
 
-export default Slider; 
+export default Slider;
