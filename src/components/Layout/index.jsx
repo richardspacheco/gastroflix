@@ -7,7 +7,7 @@ import Footer from '../Footer'
 const Container = styled.main`
   flex: 1;
   padding: 50px 5% 0 5%;
-  background-color: var(--black);
+  background-color: var(--grayDark);
   color: var(--white);
 `
 

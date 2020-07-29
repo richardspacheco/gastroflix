@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Layout from '../../../components/Layout'
 import FormField from '../../../components/FormField'
+import { FormGroup, ButtonPrimary, ButtonBlack } from './styles'
 
 function CadastroCategoria() {
   const initialValues = {
@@ -27,38 +28,49 @@ function CadastroCategoria() {
     setNewCategory(initialValues)
   }
 
+  function handleClear(e) {
+    e.preventDefault()
+    setNewCategory(initialValues)
+  }
+
   return (
     <Layout>
       <h1>Cadastro de Categoria: {newCategory.name}</h1>
 
       <form onSubmit={e => handleSubmit(e)}>
-        <FormField
-          label="Nome da categoria"
-          type="text"
-          name="name"
-          placeholder="Insira a categoria"
-          value={newCategory.name}
-          onChange={handleChange}
-        />
+        <FormGroup>
+          <FormField
+            label="Nome da categoria"
+            type="text"
+            name="name"
+            value={newCategory.name}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Cor da categoria"
+            type="color"
+            name="color"
+            value={newCategory.color}
+            onChange={handleChange}
+          />
+        </FormGroup>
         <FormField
           label="Descrição da categoria"
           type="textarea"
           name="description"
-          placeholder="Insira a descrição"
           value={newCategory.description}
           onChange={handleChange}
         />
-        <FormField
-          label="Cor da categoria"
-          type="color"
-          name="color"
-          value={newCategory.color}
-          onChange={handleChange}
-        />
 
-        <button>
-          Cadastrar
-        </button>
+        <FormGroup>
+          <ButtonPrimary>
+            Salvar
+          </ButtonPrimary>
+
+          <ButtonBlack onClick={handleClear}>
+            Limpar
+          </ButtonBlack>
+        </FormGroup>
       </form>
 
       <h2>Categorias:</h2>
