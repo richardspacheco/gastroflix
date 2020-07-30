@@ -4,13 +4,10 @@ import styled, { css } from 'styled-components'
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  
-  & * {
-    width: 100%;
-  }
 `
 
-const Input = styled.input`
+const InputStyled = styled.input`
+  width: 100%;
   height: 50px;
   margin-bottom: 32px;
   border: 0;
@@ -31,7 +28,7 @@ const Input = styled.input`
   `}
 `
 
-const LabelAnimated = styled.div`
+const LabelAnimated = styled.label`
   position: absolute;
   top: 16px;
   left: 16px;
@@ -40,8 +37,8 @@ const LabelAnimated = styled.div`
     top 0.2s,
     font-size 0.2s;
 
-  ${Input}.hasText + &,
-  ${Input}:focus + & {
+  ${InputStyled}.hasText + &,
+  ${InputStyled}:focus + & {
     font-size: 10px;
     top: 3px;
   }
@@ -50,17 +47,18 @@ const LabelAnimated = styled.div`
 function FormField(props) {
   return (
     <Wrapper>
-      <label>
-        <Input as={props.type === 'textarea' ? 'textarea' : 'input'}
+        <InputStyled as={props.type === 'textarea' ? 'textarea' : 'input'}
           type={props.type === 'textarea' ? null : props.type}
+          id={`id_${props.name}`}
           name={props.name}
           placeholder={props.placeholder}
           value={props.value}
           onChange={props.onChange}
           className={props.value ? 'hasText' : ''}
         />
-        <LabelAnimated>{props.label}</LabelAnimated>
-      </label>
+        <LabelAnimated htmlFor={`id_${props.name}`}>
+          {props.label}
+        </LabelAnimated>
     </Wrapper>
   )
 }
