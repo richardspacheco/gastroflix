@@ -1,24 +1,31 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import Menu from '../Menu'
-import Footer from '../Footer'
+import Menu from '../Menu';
+import Footer from '../Footer';
 
 const Container = styled.main`
   flex: 1;
   padding: 50px 5% 0 5%;
   background-color: var(--grayDark);
   color: var(--white);
-`
+`;
 
-export default function Layout(props) {
+function Layout({ children }) {
   return (
     <>
       <Menu />
       <Container>
-        {props.children}
+        {children}
       </Container>
       <Footer />
     </>
-  )
+  );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Layout;

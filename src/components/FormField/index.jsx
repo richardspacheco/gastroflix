@@ -1,10 +1,11 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-`
+`;
 
 const InputStyled = styled.input`
   width: 100%;
@@ -21,12 +22,12 @@ const InputStyled = styled.input`
     outline: none;
   }
 
-  ${props => props.as === 'textarea' && css`
+  ${(props) => props.as === 'textarea' && css`
     height: auto;
     padding: 20px 16px 16px 16px;
     resize: none;
   `}
-`
+`;
 
 const LabelAnimated = styled.label`
   position: absolute;
@@ -42,25 +43,48 @@ const LabelAnimated = styled.label`
     font-size: 10px;
     top: 3px;
   }
-`
+`;
 
-function FormField(props) {
+function FormField({
+  label,
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+}) {
   return (
     <Wrapper>
-        <InputStyled as={props.type === 'textarea' ? 'textarea' : 'input'}
-          type={props.type === 'textarea' ? null : props.type}
-          id={`id_${props.name}`}
-          name={props.name}
-          placeholder={props.placeholder}
-          value={props.value}
-          onChange={props.onChange}
-          className={props.value ? 'hasText' : ''}
-        />
-        <LabelAnimated htmlFor={`id_${props.name}`}>
-          {props.label}
-        </LabelAnimated>
+      <InputStyled
+        as={type === 'textarea' ? 'textarea' : 'input'}
+        type={type === 'textarea' ? null : type}
+        id={`id_${name}`}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className={value ? 'hasText' : ''}
+      />
+      <LabelAnimated htmlFor={`id_${name}`}>
+        {label}
+      </LabelAnimated>
     </Wrapper>
-  )
+  );
 }
 
-export default FormField
+FormField.defaultProps = {
+  type: 'text',
+  value: 'string',
+  onChange: () => { },
+};
+
+FormField.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
+export default FormField;

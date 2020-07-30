@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './index.css';
 
 import Home from './pages/home';
-import CadastroVideo from './pages/cadastro/video'
-import CadastroCategoria from './pages/cadastro/categoria'
-import NotFound from './pages/not-found'
+import CadastroVideo from './pages/cadastro/video';
+import CadastroCategoria from './pages/cadastro/categoria';
+import NotFound from './pages/not-found';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,5 +17,5 @@ ReactDOM.render(
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

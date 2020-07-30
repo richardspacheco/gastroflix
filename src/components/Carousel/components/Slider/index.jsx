@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import PropTypes from 'prop-types';
 import SlickSlider from 'react-slick';
 import styled from 'styled-components';
 
@@ -24,7 +25,7 @@ const Container = styled.ul`
     left: 16px;
 
     &:before {
-      color: ${props => props.color};
+      color: ${(props) => props.color};
     }
   }
 
@@ -32,7 +33,7 @@ const Container = styled.ul`
     right: 16px;
 
     &:before {
-      color: ${props => props.color};
+      color: ${(props) => props.color};
     }
   }
 `;
@@ -58,5 +59,10 @@ const Slider = ({ categoryColor, children }) => (
     </SlickSlider>
   </Container>
 );
+
+Slider.propTypes = {
+  categoryColor: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default Slider;

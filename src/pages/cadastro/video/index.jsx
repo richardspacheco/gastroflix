@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Layout from '../../../components/Layout'
+import Layout from '../../../components/Layout';
 
 function CadastroVideo() {
   return (
@@ -12,7 +12,7 @@ function CadastroVideo() {
         Cadastrar categoria
       </Link>
     </Layout>
-  )
+  );
 }
 
-export default CadastroVideo
+export default CadastroVideo;

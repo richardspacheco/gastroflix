@@ -1,43 +1,46 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Layout from '../../../components/Layout'
-import FormField from '../../../components/FormField'
-import { FormGroup, ButtonPrimary, ButtonBlack } from './styles'
+import Layout from '../../../components/Layout';
+import FormField from '../../../components/FormField';
+import { FormGroup, ButtonPrimary, ButtonBlack } from './styles';
 
 function CadastroCategoria() {
   const initialValues = {
     name: '',
     description: '',
     color: 'black',
-  }
+  };
 
-  const [newCategory, setNewCategory] = useState(initialValues)
-  const [categories, setCategories] = useState([])
+  const [newCategory, setNewCategory] = useState(initialValues);
+  const [categories, setCategories] = useState([]);
 
   function handleChange({ target }) {
     setNewCategory({
       ...newCategory,
-      [target.getAttribute('name')]: target.value
-    })
+      [target.getAttribute('name')]: target.value,
+    });
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    setCategories([...categories, newCategory])
-    setNewCategory(initialValues)
+    e.preventDefault();
+    setCategories([...categories, newCategory]);
+    setNewCategory(initialValues);
   }
 
   function handleClear(e) {
-    e.preventDefault()
-    setNewCategory(initialValues)
+    e.preventDefault();
+    setNewCategory(initialValues);
   }
 
   return (
     <Layout>
-      <h1>Cadastro de Categoria: {newCategory.name}</h1>
+      <h1>
+        Cadastro de Categoria:
+        {newCategory.name}
+      </h1>
 
-      <form onSubmit={e => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <FormGroup>
           <FormField
             label="Nome da categoria"
@@ -75,7 +78,7 @@ function CadastroCategoria() {
 
       <h2>Categorias:</h2>
       <ul>
-        {categories.map(category => (
+        {categories.map((category) => (
           <li key={category.name}>
             {category.name}
           </li>
@@ -86,7 +89,7 @@ function CadastroCategoria() {
         Voltar para home
       </Link>
     </Layout>
-  )
+  );
 }
 
-export default CadastroCategoria
+export default CadastroCategoria;
