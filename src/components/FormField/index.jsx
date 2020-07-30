@@ -74,7 +74,8 @@ function FormField({
 
 FormField.defaultProps = {
   type: 'text',
-  value: 'string',
+  placeholder: null,
+  value: '',
   onChange: () => { },
 };
 
@@ -82,7 +83,7 @@ FormField.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
 };
