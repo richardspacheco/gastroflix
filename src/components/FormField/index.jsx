@@ -51,23 +51,40 @@ function FormField({
   name,
   placeholder,
   value,
+  options,
   onChange,
 }) {
+  const isTextArea = type === 'textarea';
+
   return (
     <Wrapper>
       <InputStyled
-        as={type === 'textarea' ? 'textarea' : 'input'}
-        type={type === 'textarea' ? null : type}
+        as={isTextArea ? 'textarea' : 'input'}
+        type={isTextArea ? null : type}
         id={`id_${name}`}
         name={name}
         placeholder={placeholder}
         value={value}
+        list={options ? `options_${name}` : null}
+        autoComplete="off"
         onChange={onChange}
         className={value ? 'hasText' : ''}
       />
       <LabelAnimated htmlFor={`id_${name}`}>
         {label}
       </LabelAnimated>
+      {options && (
+        <datalist id={`options_${name}`}>
+          {options.map((option) => (
+            <option
+              key={`option_${option}`}
+              value={option}
+            >
+              {option.titulo}
+            </option>
+          ))}
+        </datalist>
+      )}
     </Wrapper>
   );
 }
@@ -76,6 +93,7 @@ FormField.defaultProps = {
   type: 'text',
   placeholder: null,
   value: '',
+  options: null,
   onChange: () => { },
 };
 
@@ -85,6 +103,7 @@ FormField.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
 };
 

@@ -1,39 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import Menu from '../../components/Menu';
+import Layout from '../../components/Layout';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import Footer from '../../components/Footer';
 
-import dadosIniciais from '../../data/dados_iniciais.json';
+import categoryRepositories from '../../repositories/category';
 
 function Home() {
+  const [dadosIniciais, setcategoryList] = useState();
+
+  useEffect(() => {
+    categoryRepositories.getAllWithVideoList()
+      .then((res) => setcategoryList(res))
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
-    <div style={{ background: '#141414' }}>
-      <Menu />
+    <Layout noPadding>
+      {!dadosIniciais && (<div>Loading...</div>)}
 
-      <BannerMain
-        url={dadosIniciais.categorias[0].videos[0].url}
-        videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-      />
+      {dadosIniciais && (
+        <>
+          <BannerMain
+            url={dadosIniciais[0].videos[0].url}
+            videoTitle={dadosIniciais[0].videos[0].titulo}
+          />
 
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[0]}
-      />
-
-      <Carousel category={dadosIniciais.categorias[1]} />
-
-      <Carousel category={dadosIniciais.categorias[2]} />
-
-      <Carousel category={dadosIniciais.categorias[3]} />
-
-      <Carousel category={dadosIniciais.categorias[4]} />
-
-      <Carousel category={dadosIniciais.categorias[5]} />
-
-      <Footer />
-    </div>
+          {dadosIniciais.map((categoryItem, index) => (
+            <Carousel
+              key={categoryItem.id}
+              category={categoryItem}
+              ignoreFirstVideo={index === 0}
+            />
+          ))}
+        </>
+      )}
+    </Layout>
   );
 }
 

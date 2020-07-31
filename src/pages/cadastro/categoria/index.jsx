@@ -1,59 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Layout from '../../../components/Layout';
 import FormField from '../../../components/FormField';
 import { FormGroup, ButtonPrimary, ButtonBlack } from './styles';
 
+import useForm from '../../../hooks/useForm';
+import categoryRepositories from '../../../repositories/category';
+
 function CadastroCategoria() {
   const initialValues = {
-    name: '',
+    titulo: '',
     description: '',
-    color: 'black',
+    color: '#000000',
   };
 
-  const [newCategory, setNewCategory] = useState(initialValues);
-  const [categories, setCategories] = useState([]);
+  const [category, handleChange, handleClear] = useForm(initialValues);
+  const [categoryList, setCategoryList] = useState([]);
 
-  function handleChange({ target }) {
-    setNewCategory({
-      ...newCategory,
-      [target.getAttribute('name')]: target.value,
-    });
+  async function fetchCategoryList() {
+    const data = await categoryRepositories.getAll();
+    setCategoryList(data);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    setCategories([...categories, newCategory]);
-    setNewCategory(initialValues);
+    setCategoryList([...categoryList, category]);
+    handleClear(e);
   }
 
-  function handleClear(e) {
-    e.preventDefault();
-    setNewCategory(initialValues);
-  }
+  useEffect(() => {
+    fetchCategoryList();
+  }, []);
 
   return (
     <Layout>
       <h1>
         Cadastro de Categoria:
-        {newCategory.name}
+        {` ${category.titulo}`}
       </h1>
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <FormGroup>
           <FormField
-            label="Nome da categoria"
+            label="Título da categoria"
             type="text"
-            name="name"
-            value={newCategory.name}
+            name="titulo"
+            value={category.titulo}
             onChange={handleChange}
           />
           <FormField
             label="Cor da categoria"
             type="color"
             name="color"
-            value={newCategory.color}
+            value={category.color}
             onChange={handleChange}
           />
         </FormGroup>
@@ -61,7 +61,7 @@ function CadastroCategoria() {
           label="Descrição da categoria"
           type="textarea"
           name="description"
-          value={newCategory.description}
+          value={category.description}
           onChange={handleChange}
         />
 
@@ -78,9 +78,9 @@ function CadastroCategoria() {
 
       <h2>Categorias:</h2>
       <ul>
-        {categories.map((category) => (
-          <li key={category.name}>
-            {category.name}
+        {categoryList.map((categoryItem) => (
+          <li key={categoryItem.titulo}>
+            {categoryItem.titulo}
           </li>
         ))}
       </ul>

@@ -7,16 +7,18 @@ import Footer from '../Footer';
 
 const Container = styled.main`
   flex: 1;
-  padding: 50px 5% 0 5%;
+  padding: ${(props) => (props.noPadding ? '' : '50px 5% 0 5%')};
   background-color: var(--grayDark);
   color: var(--white);
 `;
 
-function Layout({ children }) {
+function Layout({ children, noPadding }) {
   return (
     <>
       <Menu />
-      <Container>
+      <Container
+        noPadding={noPadding}
+      >
         {children}
       </Container>
       <Footer />
@@ -24,7 +26,12 @@ function Layout({ children }) {
   );
 }
 
+Layout.defaultProps = {
+  noPadding: false,
+};
+
 Layout.propTypes = {
+  noPadding: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
