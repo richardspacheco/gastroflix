@@ -54,11 +54,13 @@ Carousel.defaultProps = {
 
 Carousel.propTypes = {
   ignoreFirstVideo: PropTypes.bool,
-  category: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object,
-  ])).isRequired,
+  category: PropTypes.shape({
+    id: PropTypes.number,
+    titulo: PropTypes.string,
+    cor: PropTypes.string,
+    videos: PropTypes.arrayOf(PropTypes.object),
+    link_extra: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
 };
 
 export default Carousel;
