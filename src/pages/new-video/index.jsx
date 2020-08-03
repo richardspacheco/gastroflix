@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
@@ -6,7 +7,7 @@ import FormField from '../../components/FormField';
 import useForm from '../../hooks/useForm';
 import myListRepository from '../../repositories/myList';
 
-function NewVideo() {
+function NewVideo({ callback }) {
   const initialValues = {
     title: '',
     channel: '',
@@ -19,6 +20,7 @@ function NewVideo() {
     e.preventDefault();
     myListRepository.create(video);
     handleClear(e);
+    callback();
   }
 
   return (
@@ -54,5 +56,13 @@ function NewVideo() {
     </>
   );
 }
+
+NewVideo.defaultProps = {
+  callback: () => { },
+};
+
+NewVideo.propTypes = {
+  callback: PropTypes.func,
+};
 
 export default NewVideo;

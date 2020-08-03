@@ -32,6 +32,11 @@ function MyList() {
     updateList();
   }
 
+  function modalClose() {
+    toggleModal();
+    updateList();
+  }
+
   useEffect(() => {
     updateList();
   }, []);
@@ -79,7 +84,7 @@ function MyList() {
         display={display}
         toggleModal={toggleModal}
       >
-        {modalContent === 'video' && <NewVideo />}
+        {modalContent === 'video' && <NewVideo callback={modalClose} />}
         {modalContent === 'channel' && <NewChannel />}
       </Modal>
     </Layout>
