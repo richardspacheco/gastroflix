@@ -1,18 +1,12 @@
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 :root {
-  --primary: #2A7AE4;
-  --black: #000000;
-  --blackLighter: #9E9E9E;
-  --grayLight: #F5F5F5;
-  --grayMedium: #e5e5e5; 
-  --grayDark: #141414;
-  --white: #FFFFFF;
-  --frontEnd: #6BD1FF;
-  --backEnd: #00C86F;
+  --primary: #E50914;
+  --gray: #141414;
 }
 
 html,

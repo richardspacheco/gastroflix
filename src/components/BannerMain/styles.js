@@ -18,7 +18,6 @@ export const ContentAreaContainer = styled.section`
 ContentAreaContainer.Item = styled.div`
   width: 50%;
   display: inline-block;
-  margin-bottom: 50px;
   @media (max-width: 800px) {
     width: 100%;
   }
@@ -52,21 +51,21 @@ ContentAreaContainer.Description = styled.p`
 `;
 
 ContentAreaContainer.Title = styled.h2`
-  font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 40px;
-  line-height: 1;
   margin-top: 0;
+  margin-right: 16px;
   margin-bottom: 32px;
 
   @media (max-width: 800px) {
+    margin-right: 0;
     font-size: 32px;
     text-align: center;
   }
 `;
 
 export const BannerMainContainer = styled.section`
-  height: 80vh;
+  height: 60vh;
   position: relative;
   color: #fff;
   background-image: ${({ backgroundImage }) => `url(${backgroundImage})`}; 
@@ -74,7 +73,7 @@ export const BannerMainContainer = styled.section`
   background-position: center;
   @media (max-width: 800px) {
     height: auto;
-    min-height: 50vh;
+    min-height: 30vh;
   }
 
   &:after,
@@ -104,7 +103,8 @@ export const WatchButton = styled.button`
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   cursor: pointer;
-  padding: 16px 24px;
+  padding: 0 24px;
+  height: 50px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -112,10 +112,8 @@ export const WatchButton = styled.button`
   border-radius: 5px;
   text-decoration: none;
   display: inline-block;
-  border: 1px solid transparent;
-  color: var(--black);
-  background: var(--white);
-  border-color: var(--black);
+  border: 0;
+  background: var(--primary);
   transition: opacity .3s;
   display: none;
   margin: 0 auto;

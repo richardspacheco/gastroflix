@@ -1,49 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
+import { VideoCardGroupContainer, Title } from './styles';
 import Slider, { SliderItem } from './components/Slider';
 import VideoCard from './components/VideoCard';
 
-function Carousel({
-  ignoreFirstVideo,
-  category,
-}) {
-  const categoryTitle = category.titulo;
-  const categoryColor = category.cor;
-  const categoryExtraLink = category.link_extra;
-  const { videos } = category;
+import youtubeRepository from '../../repositories/youtube';
+
+function Carousel({ channel, ignoreFirstVideo }) {
+  const channelTitle = channel.title;
+  const [videoList, setVideoList] = useState();
+
+  useEffect(() => {
+    youtubeRepository.fetchList(channel.url)
+      .then((res) => setVideoList(res));
+  }, [channel.url]);
+
   return (
     <VideoCardGroupContainer>
-      {categoryTitle && (
+      {videoList && (
         <>
-          <Title style={{ backgroundColor: categoryColor || 'red' }}>
-            {categoryTitle}
+          <Title>
+            {channelTitle}
           </Title>
-          {categoryExtraLink && (
-            <ExtraLink href={categoryExtraLink.url} target="_blank">
-              {categoryExtraLink.text}
-            </ExtraLink>
-          )}
+          <Slider>
+            {videoList.map((video, index) => {
+              if (ignoreFirstVideo && index === 0) {
+                return null;
+              }
+
+              return (
+                <SliderItem key={video.url}>
+                  <VideoCard
+                    url={video.url}
+                    title={video.title}
+                  />
+                </SliderItem>
+              );
+            })}
+          </Slider>
         </>
       )}
-      <Slider categoryColor={categoryColor}>
-        {videos.map((video, index) => {
-          if (ignoreFirstVideo && index === 0) {
-            return null;
-          }
-
-          return (
-            <SliderItem key={video.titulo}>
-              <VideoCard
-                videoTitle={video.titulo}
-                videoURL={video.url}
-                categoryColor={categoryColor}
-              />
-            </SliderItem>
-          );
-        })}
-      </Slider>
     </VideoCardGroupContainer>
   );
 }
@@ -54,12 +51,10 @@ Carousel.defaultProps = {
 
 Carousel.propTypes = {
   ignoreFirstVideo: PropTypes.bool,
-  category: PropTypes.shape({
+  channel: PropTypes.shape({
     id: PropTypes.number,
-    titulo: PropTypes.string,
-    cor: PropTypes.string,
-    videos: PropTypes.arrayOf(PropTypes.object),
-    link_extra: PropTypes.objectOf(PropTypes.string),
+    url: PropTypes.string,
+    title: PropTypes.string,
   }).isRequired,
 };
 

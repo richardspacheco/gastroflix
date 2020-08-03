@@ -1,18 +1,24 @@
 import config from '../config';
 
-const URL_CATEGORY = `${config.URL}/categorias`;
+const URL = `${config.URL}/channels`;
 
 function getAll() {
-  return fetch(URL_CATEGORY)
+  return fetch(URL)
     .then((res) => res.json())
     .catch(() => {
       throw new Error('Não foi possível acessar os dados');
     });
 }
 
-function getAllWithVideoList() {
-  return fetch(`${URL_CATEGORY}?_embed=videos`)
-    .then((res) => res.json())
+function create(channelInfo) {
+  return fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(channelInfo),
+  })
+    .then((res) => res.status)
     .catch(() => {
       throw new Error('Não foi possível acessar os dados');
     });
@@ -20,5 +26,5 @@ function getAllWithVideoList() {
 
 export default {
   getAll,
-  getAllWithVideoList,
+  create,
 };

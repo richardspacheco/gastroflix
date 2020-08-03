@@ -14,8 +14,7 @@ const InputStyled = styled.input`
   border: 0;
   border-radius: 4px;
   padding: 16px 16px 0 16px;
-  background-color: var(--black);
-  color: white;
+  background-color: black;
   font-size: 16px;
 
   &:focus {
@@ -34,6 +33,7 @@ const LabelAnimated = styled.label`
   top: 16px;
   left: 16px;
   font-size: 16px;
+  color: #8c8c8c;
   transition:
     top 0.2s,
     font-size 0.2s;

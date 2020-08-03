@@ -2,31 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VideoCardContainer } from './styles';
 
-function getYouTubeId(youtubeURL) {
-  return youtubeURL
-    .replace(
-      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/,
-      '$7',
-    );
-}
-
-function VideoCard({ videoTitle, videoURL, categoryColor }) {
-  const image = `https://img.youtube.com/vi/${getYouTubeId(videoURL)}/hqdefault.jpg`;
+function VideoCard({ url, title }) {
   return (
     <VideoCardContainer
-      url={image}
-      href={videoURL}
+      href={`https://www.youtube.com/watch?v=${url}`}
       target="_blank"
-      style={{ borderColor: categoryColor || 'red' }}
-      title={videoTitle}
+      title={title}
+      thumbnail={`https://i.ytimg.com/vi/${url}/hqdefault.jpg`}
     />
   );
 }
 
 VideoCard.propTypes = {
-  videoTitle: PropTypes.string.isRequired,
-  videoURL: PropTypes.string.isRequired,
-  categoryColor: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default VideoCard;

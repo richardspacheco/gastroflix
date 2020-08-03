@@ -8,8 +8,7 @@ import Footer from '../Footer';
 const Container = styled.main`
   flex: 1;
   padding: ${(props) => (props.noPadding ? '' : '50px 5% 0 5%')};
-  background-color: var(--grayDark);
-  color: var(--white);
+  background-color: var(--gray);
 `;
 
 function Layout({ children, noPadding }) {

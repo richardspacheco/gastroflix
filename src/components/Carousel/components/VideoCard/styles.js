@@ -1,17 +1,16 @@
+/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
 export const VideoCardContainer = styled.a`
-  border: 2px solid;
-  border-radius: 4px;
+  border: 0;
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
-  color: white;
   --cardWidth: 20vw;
   flex: 0 0 var(--cardWidth);
   width: var(--cardWidth);
   height: calc(var(--cardWidth) * 9 / 16);
-  background-image: ${({ url }) => `url(${url})`};
+  background-image: ${({ thumbnail }) => `url(${thumbnail})`};
   background-size: cover;
   background-position: center;
   position: relative;
@@ -28,11 +27,24 @@ export const VideoCardContainer = styled.a`
     height: 100%;
     padding: 16px;
     background-color: rgb(0 0 0 / .8);
-    color: white;
     font-weight: bold;
   }
   
   &:not(:first-child) {
     margin-left: 20px;
+  }
+
+  @media (max-width: 800px) {
+    --cardWidth: 40vw;
+
+    &:hover {
+      border: 2px solid white;
+    }
+
+    &:hover::before,
+    &:focus::before {
+      content: "";
+      background-color: transparent;
+    }
   }
 `;

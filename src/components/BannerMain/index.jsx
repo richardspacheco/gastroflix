@@ -37,7 +37,7 @@ function BannerMain({
             youtubeID={youTubeID}
           />
           <WatchButton>
-            Assistir
+            Watch
           </WatchButton>
         </ContentAreaContainer.Item>
       </ContentAreaContainer>

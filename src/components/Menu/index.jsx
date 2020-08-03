@@ -12,9 +12,9 @@ function Menu() {
         <img src={Logo} alt="Gastroflix" className="Logo" />
       </Link>
 
-      <Button as={Link} to="/cadastro/video" className="ButtonLink">
-        Novo vídeo
-      </Button>
+      <Button.Menu as={Link} to="/my-list">
+        Manage
+      </Button.Menu>
     </nav>
   );
 }

@@ -10,7 +10,7 @@ function NotFound() {
         <LargeFriendlyLetters>
           404
         </LargeFriendlyLetters>
-        <h2>Come back later, maybe?</h2>
+        <h2>Nothing to see here</h2>
       </FlexWrapper>
     </Layout>
   );

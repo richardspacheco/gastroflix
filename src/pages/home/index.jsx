@@ -4,37 +4,47 @@ import Layout from '../../components/Layout';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
 
-import categoryRepositories from '../../repositories/category';
+import myListRepository from '../../repositories/myList';
+import channelRepository from '../../repositories/channel';
 
 function Home() {
-  const [dadosIniciais, setcategoryList] = useState();
+  const [myList, setMyList] = useState();
+  const [channelList, setChannelList] = useState();
 
   useEffect(() => {
-    categoryRepositories.getAllWithVideoList()
-      .then((res) => setcategoryList(res))
+    myListRepository.getAll()
+      .then((res) => setMyList(res))
+      .catch((e) => console.log(e));
+
+    channelRepository.getAll()
+      .then((res) => setChannelList(res))
       .catch((e) => console.log(e));
   }, []);
 
   return (
     <Layout noPadding>
-      {!dadosIniciais && (<div>Loading...</div>)}
+      {!myList && (<div>Loading...</div>)}
 
-      {dadosIniciais && (
+      {myList && (
         <>
-          <BannerMain
-            url={dadosIniciais[0].videos[0].url}
-            videoTitle={dadosIniciais[0].videos[0].titulo}
+          {/* <BannerMain
+            url=""
+            videoTitle=""
           />
 
-          {dadosIniciais.map((categoryItem, index) => (
-            <Carousel
-              key={categoryItem.id}
-              category={categoryItem}
-              ignoreFirstVideo={index === 0}
-            />
-          ))}
+          <Carousel
+            channel={myList}
+            ignoreFirstVideo
+          /> */}
         </>
       )}
+
+      {channelList && channelList.map((channel) => (
+        <Carousel
+          key={channel.id}
+          channel={channel}
+        />
+      ))}
     </Layout>
   );
 }

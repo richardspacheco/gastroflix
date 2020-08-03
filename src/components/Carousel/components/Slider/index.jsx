@@ -23,18 +23,10 @@ const Container = styled.ul`
   
   .slick-prev {
     left: 16px;
-
-    &:before {
-      color: ${(props) => props.color};
-    }
   }
 
   .slick-next {
     right: 16px;
-
-    &:before {
-      color: ${(props) => props.color};
-    }
   }
 `;
 
@@ -46,8 +38,8 @@ export const SliderItem = styled.li`
   }
 `;
 
-const Slider = ({ categoryColor, children }) => (
-  <Container color={categoryColor}>
+const Slider = ({ children }) => (
+  <Container>
     <SlickSlider {...{
       dots: false,
       infinite: true,
@@ -61,7 +53,6 @@ const Slider = ({ categoryColor, children }) => (
 );
 
 Slider.propTypes = {
-  categoryColor: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
