@@ -1,46 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { VideoCardGroupContainer, Title } from './styles';
 import Slider, { SliderItem } from './components/Slider';
 import VideoCard from './components/VideoCard';
 
-import youtubeRepository from '../../repositories/youtube';
-
-function Carousel({ channel, ignoreFirstVideo }) {
-  const channelTitle = channel.title;
-  const [videoList, setVideoList] = useState();
-
-  useEffect(() => {
-    youtubeRepository.fetchList(channel.url)
-      .then((res) => setVideoList(res));
-  }, [channel.url]);
-
+function Carousel({ title, videos, ignoreFirstVideo }) {
   return (
     <VideoCardGroupContainer>
-      {videoList && (
-        <>
-          <Title>
-            {channelTitle}
-          </Title>
-          <Slider>
-            {videoList.map((video, index) => {
-              if (ignoreFirstVideo && index === 0) {
-                return null;
-              }
+      <Title>
+        {title}
+      </Title>
+      <Slider>
+        {videos.map((video, index) => {
+          if (ignoreFirstVideo && index === 0) {
+            return null;
+          }
 
-              return (
-                <SliderItem key={video.url}>
-                  <VideoCard
-                    url={video.url}
-                    title={video.title}
-                  />
-                </SliderItem>
-              );
-            })}
-          </Slider>
-        </>
-      )}
+          return (
+            <SliderItem key={video.url}>
+              <VideoCard
+                url={video.url}
+                title={video.title}
+              />
+            </SliderItem>
+          );
+        })}
+      </Slider>
     </VideoCardGroupContainer>
   );
 }
@@ -51,11 +37,13 @@ Carousel.defaultProps = {
 
 Carousel.propTypes = {
   ignoreFirstVideo: PropTypes.bool,
-  channel: PropTypes.shape({
-    id: PropTypes.number,
-    url: PropTypes.string,
-    title: PropTypes.string,
-  }).isRequired,
+  title: PropTypes.string.isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default Carousel;

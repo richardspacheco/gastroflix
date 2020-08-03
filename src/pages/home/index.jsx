@@ -6,43 +6,61 @@ import Carousel from '../../components/Carousel';
 
 import myListRepository from '../../repositories/myList';
 import channelRepository from '../../repositories/channel';
+import youtubeRepository from '../../repositories/youtube';
 
 function Home() {
   const [myList, setMyList] = useState();
   const [channelList, setChannelList] = useState();
+
+  async function getChannelArrayWithVideos() {
+    const channelArray = await channelRepository.getAll();
+
+    const videoArray = await Promise.all(
+      channelArray.map((channel) => youtubeRepository.fetchList(channel.url)),
+    );
+
+    const channelArrayWithVideos = channelArray.map((channel, index) => {
+      const channelWithVideos = channel;
+      channelWithVideos.videos = videoArray[index];
+      return channelWithVideos;
+    });
+
+    setChannelList(channelArrayWithVideos);
+  }
 
   useEffect(() => {
     myListRepository.getAll()
       .then((res) => setMyList(res))
       .catch((e) => console.log(e));
 
-    channelRepository.getAll()
-      .then((res) => setChannelList(res))
-      .catch((e) => console.log(e));
+    getChannelArrayWithVideos();
   }, []);
 
   return (
     <Layout noPadding>
-      {!myList && (<div>Loading...</div>)}
+      {(!myList && !channelList) && (<div>Loading...</div>)}
 
       {myList && (
         <>
-          {/* <BannerMain
-            url=""
-            videoTitle=""
+          <BannerMain
+            videoTitle={myList[0].title}
+            videoId={myList[0].url}
           />
 
           <Carousel
-            channel={myList}
+            key="myList"
+            title="My List"
+            videos={myList}
             ignoreFirstVideo
-          /> */}
+          />
         </>
       )}
 
       {channelList && channelList.map((channel) => (
         <Carousel
-          key={channel.id}
-          channel={channel}
+          key={channel.url}
+          title={channel.title}
+          videos={channel.videos}
         />
       ))}
     </Layout>
