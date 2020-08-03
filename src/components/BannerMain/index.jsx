@@ -3,38 +3,24 @@ import PropTypes from 'prop-types';
 import VideoIframeResponsive from './components/VideoIframeResponsive';
 import { BannerMainContainer, ContentAreaContainer, WatchButton } from './styles';
 
-function getYouTubeId(youtubeURL) {
-  return youtubeURL
-    .replace(
-      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/,
-      '$7',
-    );
-}
-
 function BannerMain({
   videoTitle,
-  videoDescription,
-  url,
+  videoId,
 }) {
-  const youTubeID = getYouTubeId(url);
-  const bgUrl = `https://img.youtube.com/vi/${youTubeID}/maxresdefault.jpg`;
+  const thumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
   return (
-    <BannerMainContainer backgroundImage={bgUrl}>
+    <BannerMainContainer backgroundImage={thumbnail}>
       <ContentAreaContainer>
         <ContentAreaContainer.Item>
           <ContentAreaContainer.Title>
             {videoTitle}
           </ContentAreaContainer.Title>
-
-          <ContentAreaContainer.Description>
-            {videoDescription}
-          </ContentAreaContainer.Description>
         </ContentAreaContainer.Item>
 
         <ContentAreaContainer.Item>
           <VideoIframeResponsive
-            youtubeID={youTubeID}
+            videoId={videoId}
           />
           <WatchButton>
             Watch
@@ -45,14 +31,9 @@ function BannerMain({
   );
 }
 
-BannerMain.defaultProps = {
-  videoDescription: '',
-};
-
 BannerMain.propTypes = {
   videoTitle: PropTypes.string.isRequired,
-  videoDescription: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  videoId: PropTypes.string.isRequired,
 };
 
 export default BannerMain;

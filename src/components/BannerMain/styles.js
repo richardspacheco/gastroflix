@@ -44,12 +44,6 @@ ContentAreaContainer.Category = styled.h1`
   }
 `;
 
-ContentAreaContainer.Description = styled.p`
-  @media (max-width: 800px) {
-    display: none;
-  }
-`;
-
 ContentAreaContainer.Title = styled.h2`
   font-weight: 400;
   font-size: 40px;
