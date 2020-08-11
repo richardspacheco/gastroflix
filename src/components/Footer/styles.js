@@ -1,14 +1,15 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
-export const FooterBase = styled.footer`
+export const FooterContainer = styled.footer`
   background: black;
   border-top: 2px solid var(--primary);
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 32px;
-  padding-bottom: 16px;
+  padding: 16px;
   text-align: center;
+
+  & > p {
+    margin: 0;
+  }
   
   @media (max-width: 800px) {
     margin-bottom: 50px;
