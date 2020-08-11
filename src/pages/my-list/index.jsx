@@ -27,13 +27,13 @@ function MyList() {
       .then((res) => setMyList(res));
   }
 
-  function handleDelete(id) {
-    myListRepository.remove(id);
+  async function handleDelete(id) {
+    await myListRepository.remove(id);
     updateList();
   }
 
-  function modalClose() {
-    toggleModal();
+  function closeModal(keepOpen) {
+    if (!keepOpen) toggleModal();
     updateList();
   }
 
@@ -84,7 +84,7 @@ function MyList() {
         display={display}
         toggleModal={toggleModal}
       >
-        {modalContent === 'video' && <NewVideo callback={modalClose} />}
+        {modalContent === 'video' && <NewVideo callback={closeModal} />}
         {modalContent === 'channel' && <NewChannel />}
       </Modal>
     </Layout>

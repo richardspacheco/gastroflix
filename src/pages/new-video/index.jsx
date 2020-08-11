@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
+import InputCheckbox from '../../components/InputCheckbox';
 
 import useForm from '../../hooks/useForm';
 import myListRepository from '../../repositories/myList';
@@ -15,12 +16,13 @@ function NewVideo({ callback }) {
   };
 
   const [video, handleChange, handleClear] = useForm(initialValues);
+  const [keepOpen, setKeepOpen] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    myListRepository.create(video);
+    await myListRepository.create(video);
     handleClear(e);
-    callback();
+    callback(keepOpen);
   }
 
   return (
@@ -49,8 +51,15 @@ function NewVideo({ callback }) {
           onChange={handleChange}
         />
 
+        <InputCheckbox
+          label="Keep open"
+          name="keepOpen"
+          checked={keepOpen}
+          onChange={() => setKeepOpen(!keepOpen)}
+        />
+
         <Button.Primary>
-          Salvar
+          Save
         </Button.Primary>
       </form>
     </>

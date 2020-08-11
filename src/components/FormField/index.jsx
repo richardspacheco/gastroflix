@@ -14,7 +14,7 @@ const InputStyled = styled.input`
   border: 0;
   border-radius: 4px;
   padding: 16px 16px 0 16px;
-  background-color: black;
+  background-color: #333333;
   font-size: 16px;
 
   &:focus {
