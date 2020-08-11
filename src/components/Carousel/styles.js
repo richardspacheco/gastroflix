@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const Title = styled.h3`
   display: inline-block;
   font-size: 2rem;
-  margin-bottom: 8px;
+  margin-bottom: 0 0 8px;
 
   @media (max-width: 800px) {
     font-size: 18px;
-    padding: 10px 0;
   }
 `;
 
@@ -26,7 +25,6 @@ export const VideoCardList = styled.ul`
 `;
 
 export const VideoCardGroupContainer = styled.section`
-  min-height: 197px;
   margin-left: 5%;
   margin-bottom: 16px;
 `;
