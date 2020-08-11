@@ -13,7 +13,8 @@ export const Background = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 400px;
+  width: 90%;
+  max-width: 400px;
   background-color: var(--gray);
   padding: 16px;
   border-radius: 4px;
