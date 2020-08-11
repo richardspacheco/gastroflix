@@ -7,7 +7,7 @@ function BannerMain({
   videoTitle,
   videoId,
 }) {
-  const thumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <BannerMainContainer backgroundImage={thumbnail}>
