@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { VideoCardGroupContainer, Title } from './styles';
-import Slider, { SliderItem } from './components/Slider';
+import Slider from './components/Slider';
 import VideoCard from './components/VideoCard';
 
 function Carousel({ title, videos, ignoreFirstVideo }) {
@@ -18,12 +18,11 @@ function Carousel({ title, videos, ignoreFirstVideo }) {
           }
 
           return (
-            <SliderItem key={video.url}>
-              <VideoCard
-                url={video.url}
-                title={video.title}
-              />
-            </SliderItem>
+            <VideoCard
+              key={video.url}
+              url={video.url}
+              title={video.title}
+            />
           );
         })}
       </Slider>

@@ -25,7 +25,7 @@ export const VideoCardList = styled.ul`
 `;
 
 export const VideoCardGroupContainer = styled.section`
-  margin-left: 5%;
+  margin-left: 5vw;
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
