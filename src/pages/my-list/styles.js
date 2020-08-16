@@ -11,6 +11,12 @@ Table.Header = styled.th`
   text-align: left;
 `;
 
+Table.Row = styled.tr`
+  &:not(:last-child) td {
+    border-bottom: 1px solid white;
+  }
+`;
+
 Table.Cell = styled.td`
   padding: 8px;
 `;

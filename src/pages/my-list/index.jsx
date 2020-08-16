@@ -65,7 +65,7 @@ function MyList() {
         </thead>
         <tbody>
           {myList && myList.map((listItem) => (
-            <tr key={listItem.id}>
+            <Table.Row key={listItem.id}>
               <Table.Cell>{listItem.title}</Table.Cell>
               <Table.Cell>{listItem.channel}</Table.Cell>
               <Table.Cell>
@@ -76,7 +76,7 @@ function MyList() {
                   Delete
                 </Button>
               </Table.Cell>
-            </tr>
+            </Table.Row>
           ))}
         </tbody>
       </Table>
