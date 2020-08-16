@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VideoIframeResponsive from './components/VideoIframeResponsive';
-import { BannerMainContainer, ContentAreaContainer, WatchButton } from './styles';
+import { BannerMainContainer, ContentAreaContainer, WatchLink } from './styles';
 
 function BannerMain({
   videoTitle,
@@ -22,9 +22,11 @@ function BannerMain({
           <VideoIframeResponsive
             videoId={videoId}
           />
-          <WatchButton>
+          <WatchLink
+            href={`https://www.youtube.com/watch?v=${videoId}`}
+          >
             Watch
-          </WatchButton>
+          </WatchLink>
         </ContentAreaContainer.Item>
       </ContentAreaContainer>
     </BannerMainContainer>

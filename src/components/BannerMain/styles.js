@@ -93,25 +93,27 @@ export const BannerMainContainer = styled.section`
   }
 `;
 
-export const WatchButton = styled.button`
+export const WatchLink = styled.a`
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   cursor: pointer;
   padding: 0 24px;
   height: 50px;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   outline: none;
   border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
   border: 0;
   background: var(--primary);
   transition: opacity .3s;
   display: none;
   margin: 0 auto;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+
   @media (max-width: 800px) {
-    display: block;
+    display: flex;
   }
 `;
