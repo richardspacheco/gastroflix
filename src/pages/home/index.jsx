@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Layout from '../../components/Layout';
-import BannerMain from '../../components/BannerMain';
+import Banner from '../../components/Banner';
 import Carousel from '../../components/Carousel';
 
 import myListRepository from '../../repositories/myList';
@@ -42,7 +42,7 @@ function Home() {
 
       {myList && (
         <>
-          <BannerMain
+          <Banner
             videoTitle={myList[0].title}
             videoId={myList[0].url}
           />

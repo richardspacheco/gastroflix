@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VideoIframeResponsive from './components/VideoIframeResponsive';
-import { BannerMainContainer, ContentAreaContainer, WatchLink } from './styles';
+import { BannerContainer, ContentAreaContainer, WatchLink } from './styles';
 
-function BannerMain({
+function Banner({
   videoTitle,
   videoId,
 }) {
   const thumbnail = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
-    <BannerMainContainer backgroundImage={thumbnail}>
+    <BannerContainer backgroundImage={thumbnail}>
       <ContentAreaContainer>
         <ContentAreaContainer.Item>
           <ContentAreaContainer.Title>
@@ -29,13 +29,13 @@ function BannerMain({
           </WatchLink>
         </ContentAreaContainer.Item>
       </ContentAreaContainer>
-    </BannerMainContainer>
+    </BannerContainer>
   );
 }
 
-BannerMain.propTypes = {
+Banner.propTypes = {
   videoTitle: PropTypes.string.isRequired,
   videoId: PropTypes.string.isRequired,
 };
 
-export default BannerMain;
+export default Banner;
