@@ -15,7 +15,7 @@ export const Container = styled.div`
     transform: initial;
     
     &:before {
-      font-size: 30px;
+      font-size: 24px;
     }
   }
   
@@ -24,8 +24,7 @@ export const Container = styled.div`
     left: -5vw;
 
     @media (max-width: 800px) {
-      width: auto;
-      left: 15px;
+      display: none !important;
     }
   }
 
@@ -41,9 +40,14 @@ export const Container = styled.div`
 
   .slick-next:hover {
     background-color: rgb(0 0 0 / .8);
+  }
 
-    @media (max-width: 800px) {
-      background-color: transparent;
+  @media (max-width: 800px) {
+    .slick-prev,
+    .slick-next {
+      &:before {
+        font-size: 16px;
+      }
     }
   }
 `;
