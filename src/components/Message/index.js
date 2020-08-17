@@ -14,6 +14,10 @@ const Message = styled.div`
 
 Message.Error = styled(Message)`
   color: var(--primary);
+
+  & * {
+    color: var(--primary);
+  }
 `;
 
 export default Message;

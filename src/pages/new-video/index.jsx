@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { ErrorOutline } from '@styled-icons/material';
 
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
@@ -41,7 +42,12 @@ function NewVideo({ callback }) {
     <>
       <h2 style={{ marginTop: 0 }}>Add new video</h2>
 
-      {errors.url && <Message.Error>{errors.url}</Message.Error>}
+      {errors.url && (
+        <Message.Error>
+          <ErrorOutline size="24" style={{ marginRight: '8px' }} />
+          {errors.url}
+        </Message.Error>
+      )}
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <FormField
