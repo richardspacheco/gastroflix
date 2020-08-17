@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Delete } from '@styled-icons/material';
 
 import { Table } from './styles';
 import Button from '../../components/Button';
@@ -72,12 +73,9 @@ function MyList() {
                 <Table.Cell>{listItem.title}</Table.Cell>
                 <Table.Cell>{listItem.channel}</Table.Cell>
                 <Table.Cell>
-                  <Button
-                    style={{ height: '30px' }}
-                    onClick={() => handleDelete(listItem.id)}
-                  >
-                    Delete
-                  </Button>
+                  <Button.Icon onClick={() => handleDelete(listItem.id)}>
+                    <Delete size="24" title="Delete" />
+                  </Button.Icon>
                 </Table.Cell>
               </Table.Row>
             ))}

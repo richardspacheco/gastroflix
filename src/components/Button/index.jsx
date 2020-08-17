@@ -53,4 +53,15 @@ Button.Menu = styled(Button)`
   }
 `;
 
+Button.Icon = styled(Button)`
+  width: auto;
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+
+  & * {
+    color: var(--primary);
+  }
+`;
+
 export default Button;
