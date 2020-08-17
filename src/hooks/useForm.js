@@ -1,25 +1,32 @@
 import { useState } from 'react';
 
-function useForm(initialValues) {
-  const [values, setNewValues] = useState(initialValues);
+function useForm(initialFields, validate) {
+  const [fields, setFields] = useState(initialFields);
+  const [errors, setErrors] = useState({});
 
   function handleChange({ target }) {
-    setNewValues({
-      ...values,
+    setFields({
+      ...fields,
       [target.getAttribute('name')]: target.value,
     });
   }
 
   function handleClear(e) {
     e.preventDefault();
-    setNewValues(initialValues);
+    setFields(initialFields);
   }
 
-  return [
-    values,
+  function validateFields() {
+    setErrors(validate(fields));
+  }
+
+  return {
+    fields,
+    errors,
     handleChange,
     handleClear,
-  ];
+    validateFields,
+  };
 }
 
 export default useForm;

@@ -51,6 +51,7 @@ function FormField({
   name,
   placeholder,
   value,
+  required,
   options,
   onChange,
 }) {
@@ -65,6 +66,7 @@ function FormField({
         name={name}
         placeholder={placeholder}
         value={value}
+        required={required}
         list={options ? `options_${name}` : null}
         autoComplete="off"
         onChange={onChange}
@@ -93,6 +95,7 @@ FormField.defaultProps = {
   type: 'text',
   placeholder: null,
   value: '',
+  required: false,
   options: null,
   onChange: () => { },
 };
@@ -103,6 +106,7 @@ FormField.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  required: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
 };
