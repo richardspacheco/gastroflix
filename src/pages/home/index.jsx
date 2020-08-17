@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
 import Carousel from '../../components/Carousel';
+import Loading from '../../components/Loading';
 
 import myListRepository from '../../repositories/myList';
 import channelRepository from '../../repositories/channel';
@@ -38,8 +39,7 @@ function Home() {
 
   return (
     <Layout noPadding>
-      {(!myList && !channelList) && (<div>Loading...</div>)}
-
+      {!myList && <Loading />}
       {myList && (
         <>
           <Banner
@@ -56,6 +56,7 @@ function Home() {
         </>
       )}
 
+      {!channelList && <Loading />}
       {channelList && channelList.map((channel) => (
         <Carousel
           key={channel.url}

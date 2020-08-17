@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import FlexGroup from '../../components/FlexGroup';
 import Modal from '../../components/Modal';
+import Loading from '../../components/Loading';
 
 import NewChannel from '../new-channel';
 import NewVideo from '../new-video';
@@ -55,31 +56,34 @@ function MyList() {
       <h1 style={{ marginTop: '32px' }}>
         My List
       </h1>
-      <Table>
-        <thead>
-          <tr>
-            <Table.Header>Title</Table.Header>
-            <Table.Header>Channel</Table.Header>
-            <Table.Header />
-          </tr>
-        </thead>
-        <tbody>
-          {myList && myList.map((listItem) => (
-            <Table.Row key={listItem.id}>
-              <Table.Cell>{listItem.title}</Table.Cell>
-              <Table.Cell>{listItem.channel}</Table.Cell>
-              <Table.Cell>
-                <Button
-                  style={{ height: '30px' }}
-                  onClick={() => handleDelete(listItem.id)}
-                >
-                  Delete
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </tbody>
-      </Table>
+      {!myList && <Loading />}
+      {myList && (
+        <Table>
+          <thead>
+            <tr>
+              <Table.Header>Title</Table.Header>
+              <Table.Header>Channel</Table.Header>
+              <Table.Header />
+            </tr>
+          </thead>
+          <tbody>
+            {myList && myList.map((listItem) => (
+              <Table.Row key={listItem.id}>
+                <Table.Cell>{listItem.title}</Table.Cell>
+                <Table.Cell>{listItem.channel}</Table.Cell>
+                <Table.Cell>
+                  <Button
+                    style={{ height: '30px' }}
+                    onClick={() => handleDelete(listItem.id)}
+                  >
+                    Delete
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </tbody>
+        </Table>
+      )}
       <Modal
         display={display}
         toggleModal={toggleModal}
