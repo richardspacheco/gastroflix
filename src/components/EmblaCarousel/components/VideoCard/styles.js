@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 export const VideoCardContainer = styled.a`
   border: 0;
+  border-right: .5vw solid var(--gray);
+  box-sizing: content-box;
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
-  --cardWidth: 17.5vw;
+  --cardWidth: 18vw;
   flex: 0 0 var(--cardWidth);
   width: var(--cardWidth);
   height: calc(var(--cardWidth) * 9 / 16);
@@ -16,7 +18,6 @@ export const VideoCardContainer = styled.a`
   position: relative;
   display: flex;
   align-items: flex-end;
-  margin-right: .5vw;
 
   &::before {
     content: "${({ title }) => title}";
@@ -26,6 +27,7 @@ export const VideoCardContainer = styled.a`
     height: 100%;
     padding: 16px;
     background-color: rgb(0 0 0 / .8);
+    font-size: 14px;
     font-weight: bold;
     opacity: 0;
     transition: opacity .3s;
@@ -35,13 +37,13 @@ export const VideoCardContainer = styled.a`
   &:focus::before {
     opacity: 1;
   }
-  
-  &:not(:first-child) {
-    margin-left: 20px;
-  }
 
   @media (max-width: 800px) {
     --cardWidth: 40vw;
-    margin-right: 2.5vw;
+    border-right: 1vw solid var(--gray);
+
+    &::before {
+      font-size: 10px;
+    }
   }
 `;

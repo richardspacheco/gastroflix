@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
-import Carousel from '../../components/Carousel';
+import EmblaCarousel from '../../components/EmblaCarousel';
 import Loading from '../../components/Loading';
 
 import myListRepository from '../../repositories/myList';
@@ -47,18 +47,17 @@ function Home() {
             videoId={myList[0].url}
           />
 
-          <Carousel
+          <EmblaCarousel
             key="myList"
             title="My List"
             videos={myList}
-            ignoreFirstVideo
           />
         </>
       )}
 
       {!channelList && <Loading />}
       {channelList && channelList.map((channel) => (
-        <Carousel
+        <EmblaCarousel
           key={channel.url}
           title={channel.title}
           videos={channel.videos}
