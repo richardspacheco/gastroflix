@@ -5,7 +5,7 @@ import { useEmblaCarousel } from 'embla-carousel/react';
 import VideoCard from './components/VideoCard';
 import { Container, Title } from './styles';
 
-function EmblaCarousel({ title, videos }) {
+function EmblaCarousel({ title, videos, onCardClick }) {
   const [EmblaCarouselReact, embla] = useEmblaCarousel({ loop: true });
 
   function checkListLength(list) {
@@ -35,6 +35,7 @@ function EmblaCarousel({ title, videos }) {
               key={`${video.url}_${index}`}
               url={video.url}
               title={video.title}
+              onCardClick={onCardClick}
             />
           ))}
         </div>
@@ -42,6 +43,10 @@ function EmblaCarousel({ title, videos }) {
     </Container>
   );
 }
+
+EmblaCarousel.defaultProps = {
+  onCardClick: () => {},
+};
 
 EmblaCarousel.propTypes = {
   title: PropTypes.string.isRequired,
@@ -51,6 +56,7 @@ EmblaCarousel.propTypes = {
       title: PropTypes.string,
     }),
   ).isRequired,
+  onCardClick: PropTypes.func,
 };
 
 export default EmblaCarousel;

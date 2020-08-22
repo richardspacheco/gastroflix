@@ -12,6 +12,15 @@ import youtubeRepository from '../../repositories/youtube';
 function Home() {
   const [myList, setMyList] = useState();
   const [channelList, setChannelList] = useState();
+  const [bannerVideo, setBannerVideo] = useState();
+
+  function updateBanner(videoId) {
+    setBannerVideo(videoId);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
   async function getChannelArrayWithVideos() {
     const channelArray = await channelRepository.getAll();
@@ -42,15 +51,12 @@ function Home() {
       {!myList && <Loading />}
       {myList && (
         <>
-          <Banner
-            videoTitle={myList[0].title}
-            videoId={myList[0].url}
-          />
-
+          <Banner videoId={bannerVideo || myList[0].url} />
           <EmblaCarousel
             key="myList"
             title="My List"
             videos={myList}
+            onCardClick={updateBanner}
           />
         </>
       )}
@@ -61,6 +67,7 @@ function Home() {
           key={channel.url}
           title={channel.title}
           videos={channel.videos}
+          onCardClick={updateBanner}
         />
       ))}
     </Layout>

@@ -2,20 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VideoCardContainer } from './styles';
 
-function VideoCard({ url, title }) {
+function VideoCard({ url, title, onCardClick }) {
   return (
     <VideoCardContainer
-      href={`https://www.youtube.com/watch?v=${url}`}
-      target="_blank"
+      src={`https://i.ytimg.com/vi/${url}/hqdefault.jpg`}
+      alt={title}
       title={title}
-      thumbnail={`https://i.ytimg.com/vi/${url}/hqdefault.jpg`}
+      onClick={() => onCardClick(url)}
     />
   );
 }
 
+VideoCard.defaultProps = {
+  onCardClick: () => {},
+};
+
 VideoCard.propTypes = {
   url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  onCardClick: PropTypes.func,
 };
 
 export default VideoCard;

@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
-export const VideoCardContainer = styled.a`
+export const VideoCardContainer = styled.img`
   border: 0;
   border-right: .5vw solid var(--gray);
   box-sizing: content-box;
@@ -12,9 +12,7 @@ export const VideoCardContainer = styled.a`
   flex: 0 0 var(--cardWidth);
   width: var(--cardWidth);
   height: calc(var(--cardWidth) * 9 / 16);
-  background-image: ${({ thumbnail }) => `url(${thumbnail})`};
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   position: relative;
   display: flex;
   align-items: flex-end;
