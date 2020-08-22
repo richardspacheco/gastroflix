@@ -4,7 +4,8 @@ export const VideoContainer = styled.div`
   position: relative;
   overflow: hidden;
   width: calc(60vh * 16 / 9);
-  height: 90%;
+  height: 100%;
+
   @media (max-width: 800px) {
     display: none;
   }
