@@ -17,7 +17,9 @@ function useForm(initialFields, validate) {
   }
 
   function validateFields() {
-    setErrors(validate(fields));
+    const validateErrors = validate(fields);
+    setErrors(validateErrors);
+    return validateErrors;
   }
 
   return {

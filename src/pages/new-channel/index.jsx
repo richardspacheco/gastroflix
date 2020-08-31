@@ -28,8 +28,9 @@ function NewChannel() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    validateFields();
-    if (Object.keys(errors).length === 0) return;
+
+    const validateErrors = validateFields();
+    if (Object.keys(validateErrors).length > 0) return;
 
     channelRepositories.create(channel)
       .then(() => {
