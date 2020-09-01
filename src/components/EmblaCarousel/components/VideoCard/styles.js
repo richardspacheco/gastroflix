@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const VideoCardContainer = styled.div`
   border: 0;
-  border-right: .5vw solid var(--gray);
+  border-right: 4px solid var(--gray);
   box-sizing: content-box;
   text-decoration: none;
   overflow: hidden;
@@ -21,6 +21,7 @@ export const VideoCardContainer = styled.div`
   height: calc(var(--cardWidth) * 9 / 16);
 
   & > span {
+    width: 100%;
     height: 100%;
     padding: 16px;
     background-color: rgb(0 0 0 / .8);
@@ -37,7 +38,6 @@ export const VideoCardContainer = styled.div`
 
   @media (max-width: 800px) {
     --cardWidth: 40vw;
-    border-right: 1vw solid var(--gray);
 
     & > span {
       display: none;

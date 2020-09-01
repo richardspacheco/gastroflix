@@ -6,6 +6,12 @@ function VideoCard({ url, title, onCardClick }) {
   const mql = window.matchMedia('(max-width: 800px)');
   const [isMobile, setIsMobile] = useState(mql.matches);
 
+  let mousePosition = null;
+  function handleClick(e) {
+    const positionChanged = mousePosition === `${e.clientX} ${e.clientY}`;
+    if (positionChanged) onCardClick(url);
+  }
+
   function checkWindowWidth() {
     if (isMobile !== mql.matches) {
       setIsMobile(mql.matches);
@@ -22,7 +28,9 @@ function VideoCard({ url, title, onCardClick }) {
       as={isMobile && 'a'}
       href={isMobile ? `https://www.youtube.com/watch?v=${url}` : undefined}
       thumbnail={`https://i.ytimg.com/vi/${url}/hqdefault.jpg`}
-      onClick={() => onCardClick(url)}
+      // eslint-disable-next-line no-return-assign
+      onMouseDown={(e) => mousePosition = `${e.clientX} ${e.clientY}`}
+      onClick={(e) => handleClick(e)}
     >
       <span>{title}</span>
     </VideoCardContainer>
