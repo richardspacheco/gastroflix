@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import Banner from '../../components/Banner';
 import EmblaCarousel from '../../components/EmblaCarousel';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 import myListRepository from '../../repositories/myList';
 import channelRepository from '../../repositories/channel';
@@ -13,6 +14,7 @@ function Home() {
   const [myList, setMyList] = useState();
   const [channelList, setChannelList] = useState();
   const [bannerVideo, setBannerVideo] = useState();
+  const [serverError, setServerError] = useState();
 
   function updateBanner(videoId) {
     setBannerVideo(videoId);
@@ -23,32 +25,43 @@ function Home() {
   }
 
   async function getChannelArrayWithVideos() {
-    const channelArray = await channelRepository.getAll();
+    try {
+      const channelArray = await channelRepository.getAll();
 
-    const videoArray = await Promise.all(
-      channelArray.map((channel) => youtubeRepository.fetchList(channel.url)),
-    );
+      const videoArray = await Promise.all(
+        channelArray.map((channel) => youtubeRepository.fetchList(channel.url)),
+      );
 
-    const channelArrayWithVideos = channelArray.map((channel, index) => {
-      const channelWithVideos = channel;
-      channelWithVideos.videos = videoArray[index];
-      return channelWithVideos;
-    });
+      const channelArrayWithVideos = channelArray.map((channel, index) => {
+        const channelWithVideos = channel;
+        channelWithVideos.videos = videoArray[index];
+        return channelWithVideos;
+      });
 
-    setChannelList(channelArrayWithVideos);
+      setChannelList(channelArrayWithVideos);
+    } catch (err) {
+      setServerError(err);
+    }
   }
 
   useEffect(() => {
     myListRepository.getAll()
       .then((res) => setMyList(res))
-      .catch((e) => console.log(e));
+      .catch((err) => setServerError(err));
 
     getChannelArrayWithVideos();
   }, []);
 
   return (
     <Layout noPadding>
-      {!myList && <Loading />}
+      {serverError && (
+        <Message error style={{ margin: '32px 5%', width: '90%' }}>
+          {serverError}
+        </Message>
+      )}
+
+      {(!serverError && !myList) && <Loading />}
+
       {myList && (
         <>
           <Banner videoId={bannerVideo || myList[0].url} />
@@ -61,14 +74,17 @@ function Home() {
         </>
       )}
 
-      {!channelList && <Loading />}
+      {(!serverError && !channelList) && <Loading />}
+
       {channelList && channelList.map((channel) => (
-        <EmblaCarousel
-          key={channel.url}
-          title={channel.title}
-          videos={channel.videos}
-          onCardClick={updateBanner}
-        />
+        channel.videos && (
+          <EmblaCarousel
+            key={channel.url}
+            title={channel.title}
+            videos={channel.videos}
+            onCardClick={updateBanner}
+          />
+        )
       ))}
     </Layout>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ErrorOutline } from '@styled-icons/material';
 
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
@@ -12,6 +11,7 @@ import myListRepository from '../../repositories/myList';
 
 function NewVideo({ callback }) {
   const [keepOpen, setKeepOpen] = useState(false);
+  const [serverError, setServerError] = useState();
 
   const initialFields = {};
   function validate(fields) {
@@ -22,7 +22,7 @@ function NewVideo({ callback }) {
 
   const {
     fields: video,
-    errors,
+    errors: formErrors,
     handleChange,
     handleClear,
     validateFields,
@@ -34,7 +34,13 @@ function NewVideo({ callback }) {
     const validateErrors = validateFields();
     if (Object.keys(validateErrors).length > 0) return;
 
-    await myListRepository.create(video);
+    try {
+      await myListRepository.create(video);
+    } catch (err) {
+      setServerError(err);
+      return;
+    }
+
     handleClear(e);
     callback(keepOpen);
   }
@@ -43,12 +49,9 @@ function NewVideo({ callback }) {
     <>
       <h2 style={{ marginTop: 0 }}>Add new video</h2>
 
-      {errors.url && (
-        <Message.Error>
-          <ErrorOutline size="24" style={{ marginRight: '8px' }} />
-          {errors.url}
-        </Message.Error>
-      )}
+      {serverError && <Message error>{serverError}</Message>}
+
+      {formErrors.url && <Message error>{formErrors.url}</Message>}
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <FormField

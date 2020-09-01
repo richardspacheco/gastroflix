@@ -7,6 +7,7 @@ import Layout from '../../components/Layout';
 import FlexGroup from '../../components/FlexGroup';
 import Modal from '../../components/Modal';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 import NewChannel from '../new-channel';
 import NewVideo from '../new-video';
@@ -18,6 +19,7 @@ function MyList() {
   const [display, toggleModal] = useModal();
   const [modalContent, setModalContent] = useState();
   const [myList, setMyList] = useState();
+  const [serverError, setServerError] = useState();
 
   function handleModal(content) {
     setModalContent(content);
@@ -26,7 +28,8 @@ function MyList() {
 
   function updateList() {
     myListRepository.getAll()
-      .then((res) => setMyList(res));
+      .then((res) => setMyList(res))
+      .catch((err) => setServerError(err));
   }
 
   async function handleDelete(id) {
@@ -57,7 +60,11 @@ function MyList() {
       <h1 style={{ marginTop: '32px' }}>
         My List
       </h1>
-      {!myList && <Loading />}
+
+      {serverError && <Message error>{serverError}</Message>}
+
+      {(!serverError && !myList) && <Loading />}
+
       {myList && (
         <Table>
           <thead>

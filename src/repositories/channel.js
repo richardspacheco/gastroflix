@@ -5,8 +5,10 @@ const URL = `${config.URL}/channels`;
 function getAll() {
   return fetch(URL)
     .then((res) => res.json())
-    .catch(() => {
-      throw new Error('Não foi possível acessar os dados');
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
     });
 }
 
@@ -19,8 +21,10 @@ function create(channelInfo) {
     body: JSON.stringify(channelInfo),
   })
     .then((res) => res.status)
-    .catch(() => {
-      throw new Error('Não foi possível acessar os dados');
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
     });
 }
 

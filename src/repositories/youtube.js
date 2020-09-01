@@ -10,6 +10,7 @@ function fetchList(channelId) {
   return fetch(url)
     .then((res) => res.json())
     .then((res) => {
+      if (!res.items) return null;
       const videos = res.items;
       return videos.map((video) => ({
         url: video.snippet.resourceId.videoId,

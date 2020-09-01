@@ -7,13 +7,15 @@ function VideoCard({ url, title, onCardClick }) {
   const [isMobile, setIsMobile] = useState(mql.matches);
 
   function checkWindowWidth() {
-    setIsMobile(mql.matches);
+    if (isMobile !== mql.matches) {
+      setIsMobile(mql.matches);
+    }
   }
 
   useEffect(() => {
     window.addEventListener('resize', checkWindowWidth);
     return () => window.removeEventListener('resize', checkWindowWidth);
-  }, [isMobile]);
+  });
 
   return (
     <VideoCardContainer

@@ -5,22 +5,26 @@ const URL = `${config.URL}/videos`;
 function getAll() {
   return fetch(URL)
     .then((res) => res.json())
-    .catch(() => {
-      throw new Error('Não foi possível acessar os dados');
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
     });
 }
 
-function create(videoInformation) {
+function create(videoInfo) {
   return fetch(URL, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(videoInformation),
+    body: JSON.stringify(videoInfo),
   })
     .then((res) => res.json())
-    .catch(() => {
-      throw new Error('Não foi possível acessar os dados');
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
     });
 }
 
@@ -29,8 +33,10 @@ function remove(id) {
     method: 'DELETE',
   })
     .then((res) => res.json())
-    .catch(() => {
-      throw new Error('Não foi possível acessar os dados');
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
     });
 }
 

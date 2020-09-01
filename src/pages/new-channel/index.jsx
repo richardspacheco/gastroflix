@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ErrorOutline } from '@styled-icons/material';
 
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
 import Message from '../../components/Message';
 
 import useForm from '../../hooks/useForm';
-import channelRepositories from '../../repositories/channel';
+import channelRepository from '../../repositories/channel';
 
 function NewChannel() {
   const history = useHistory();
+  const [serverError, setServerError] = useState();
 
   const initialFields = {};
   function validate(fields) {
@@ -21,7 +21,7 @@ function NewChannel() {
 
   const {
     fields: channel,
-    errors,
+    errors: formErrors,
     handleChange,
     validateFields,
   } = useForm(initialFields, validate);
@@ -32,22 +32,18 @@ function NewChannel() {
     const validateErrors = validateFields();
     if (Object.keys(validateErrors).length > 0) return;
 
-    channelRepositories.create(channel)
-      .then(() => {
-        history.push('/');
-      });
+    channelRepository.create(channel)
+      .then(() => history.push('/'))
+      .catch((err) => setServerError(err));
   }
 
   return (
     <>
       <h2 style={{ marginTop: 0 }}>Add new channel</h2>
 
-      {errors.url && (
-        <Message.Error>
-          <ErrorOutline size="24" style={{ marginRight: '8px' }} />
-          {errors.url}
-        </Message.Error>
-      )}
+      {serverError && <Message error>{serverError}</Message>}
+
+      {formErrors.url && <Message error>{formErrors.url}</Message>}
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <FormField
