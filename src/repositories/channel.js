@@ -1,15 +1,12 @@
 import config from '../config';
+import { handleError } from '../utils/errorHandler';
 
 const URL = `${config.URL}/channels`;
 
 function getAll() {
   return fetch(URL)
     .then((res) => res.json())
-    .catch((err) => {
-      let errMessage = '';
-      if (!err.status) errMessage = 'Server connection failure';
-      throw errMessage;
-    });
+    .catch((err) => handleError(err));
 }
 
 function create(channelInfo) {
@@ -21,11 +18,7 @@ function create(channelInfo) {
     body: JSON.stringify(channelInfo),
   })
     .then((res) => res.status)
-    .catch((err) => {
-      let errMessage = '';
-      if (!err.status) errMessage = 'Server connection failure';
-      throw errMessage;
-    });
+    .catch((err) => handleError(err));
 }
 
 function remove(id) {
@@ -33,11 +26,7 @@ function remove(id) {
     method: 'DELETE',
   })
     .then((res) => res.json())
-    .catch((err) => {
-      let errMessage = '';
-      if (!err.status) errMessage = 'Server connection failure';
-      throw errMessage;
-    });
+    .catch((err) => handleError(err));
 }
 
 export default {
