@@ -14,11 +14,13 @@ import NewVideo from '../new-video';
 
 import useModal from '../../hooks/useModal';
 import myListRepository from '../../repositories/myList';
+import channelRepository from '../../repositories/channel';
 
 function MyList() {
   const [display, toggleModal] = useModal();
   const [modalContent, setModalContent] = useState();
   const [myList, setMyList] = useState();
+  const [channels, setChannels] = useState();
   const [serverError, setServerError] = useState();
 
   function handleModal(content) {
@@ -26,24 +28,32 @@ function MyList() {
     toggleModal();
   }
 
-  function updateList() {
+  function updateLists() {
     myListRepository.getAll()
       .then((res) => setMyList(res))
       .catch((err) => setServerError(err));
+
+    channelRepository.getAll()
+      .then((res) => setChannels(res))
+      .catch((err) => setServerError(err));
   }
 
-  async function handleDelete(id) {
-    await myListRepository.remove(id);
-    updateList();
+  async function handleDelete(target, id) {
+    if (target === 'myList') {
+      await myListRepository.remove(id);
+    } else if (target === 'channel') {
+      await channelRepository.remove(id);
+    }
+    updateLists();
   }
 
   function closeModal(keepOpen) {
     if (!keepOpen) toggleModal();
-    updateList();
+    updateLists();
   }
 
   useEffect(() => {
-    updateList();
+    updateLists();
   }, []);
 
   return (
@@ -80,7 +90,7 @@ function MyList() {
                 <Table.Cell>{listItem.title}</Table.Cell>
                 <Table.Cell>{listItem.channel}</Table.Cell>
                 <Table.Cell>
-                  <Button.Icon onClick={() => handleDelete(listItem.id)}>
+                  <Button.Icon onClick={() => handleDelete('myList', listItem.id)}>
                     <Delete size="24" title="Delete" />
                   </Button.Icon>
                 </Table.Cell>
@@ -89,6 +99,32 @@ function MyList() {
           </tbody>
         </Table>
       )}
+
+      <h1 style={{ marginTop: '32px' }}>
+        My Channels
+      </h1>
+
+      {serverError && <Message error>{serverError}</Message>}
+
+      {(!serverError && !channels) && <Loading />}
+
+      {channels && (
+        <Table>
+          <tbody>
+            {channels && channels.map((listItem) => (
+              <Table.Row key={listItem.id}>
+                <Table.Cell>{listItem.title}</Table.Cell>
+                <Table.Cell>
+                  <Button.Icon onClick={() => handleDelete('channel', listItem.id)}>
+                    <Delete size="24" title="Delete" />
+                  </Button.Icon>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </tbody>
+        </Table>
+      )}
+
       <Modal
         display={display}
         toggleModal={toggleModal}

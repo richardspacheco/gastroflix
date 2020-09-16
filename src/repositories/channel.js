@@ -28,7 +28,20 @@ function create(channelInfo) {
     });
 }
 
+function remove(id) {
+  return fetch(`${URL}/${id}`, {
+    method: 'DELETE',
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      let errMessage = '';
+      if (!err.status) errMessage = 'Server connection failure';
+      throw errMessage;
+    });
+}
+
 export default {
   getAll,
   create,
+  remove,
 };
