@@ -1,21 +1,27 @@
-# Aluraflix
+<span align="center">
+  <img alt="Gastroflix" src="src/assets/img/logo.png" width="400px">
+</span>
 
-[![licence mit](https://img.shields.io/badge/licence-MIT-blue.svg)](https://github.com/imersao-alura/aluraflix/blob/master/LICENSE)
+## :computer: Projeto
 
-<p align="center">
-  <img alt="Logo do projeto" width="150px" src="https://www.alura.com.br/assets/img/imersoes/react/imersao-react-logo.1594044142.svg" />
-</p>
+[Acesse aqui o website](https://gastroflix.vercel.app/)
 
-> Projeto construido durante a [Imersão React da Alura](https://www.alura.com.br/imersao-react/)
+Inspirado no projeto desenvolvido durante a **Imersão React**, evento realizado pela [Alura](https://www.alura.com.br/), **Gastroflix** é uma plataforma que permite ao usuário guardar e exibir seus vídeos e canais culinários favoritos do YouTube.
 
-## Como rodar o projeto?
+O projeto foi desenvolvido com as seguintes tecnologias:
 
-Após baixar o projeto, acesse ele via seu terminal rode os comandos:
+- [React](https://reactjs.org/)
+- [styled-components](https://styled-components.com/)
+- [Node.js](https://nodejs.org/en/)
+- [JSON Server](https://github.com/typicode/json-server)
 
-```sh
-npm install
-npm start
-```
+## :rocket: Instalação
 
-## License/Licença do Projeto
-[MIT License](./LICENSE) © [richardspacheco](https://github.com/richardspacheco)
+0. Siga as instruções do repositório [gastroflix-api](https://github.com/richardspacheco/gastroflix-api);
+1. Acesse o diretório do projeto;
+2. Execute `npm install` para instalar as dependências do projeto;
+3. Execute `npm start` para iniciar o ambiente de desenvolvimento.
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT. Acesse o arquivo [LICENSE](LICENSE) para mais detalhes.
