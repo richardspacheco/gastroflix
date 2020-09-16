@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 const Container = styled.main`
   flex: 1;
-  padding: ${(props) => (props.noPadding ? '' : '50px 5% 0 5%')};
+  padding: ${(props) => (props.noPadding ? '' : '32px 5% 0 5%')};
   background-color: var(--gray);
 `;
 

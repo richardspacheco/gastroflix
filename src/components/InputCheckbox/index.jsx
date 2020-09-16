@@ -63,7 +63,7 @@ const InputCheckboxContainer = styled.div`
     width: 20px;
     height: 20px;
     left: -20px;
-    background: #333333;
+    background: #222222;
   }
 
   & > input:checked + label::before {

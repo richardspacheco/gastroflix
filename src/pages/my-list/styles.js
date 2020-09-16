@@ -7,16 +7,18 @@ export const Table = styled.table`
 `;
 
 Table.Header = styled.th`
-  padding: 8px;
+  padding: 8px 16px 8px 8px;
   text-align: left;
+  border-bottom: 1px solid white;
 `;
 
 Table.Row = styled.tr`
-  &:not(:last-child) td {
-    border-bottom: 1px solid white;
+  &:nth-child(even) {
+    background-color: #222222;
+    border-radius: 8px;
   }
 `;
 
 Table.Cell = styled.td`
-  padding: 8px;
+  padding: 8px 16px 8px 8px;
 `;
