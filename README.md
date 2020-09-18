@@ -1,10 +1,8 @@
-<span align="center">
-  <img alt="Gastroflix" src="src/assets/img/logo.png" width="400px">
-</span>
+<img alt="Gastroflix" src="src/assets/img/logo.png" width="400px">
 
 ## :computer: Projeto
 
-[Acesse aqui o website](https://gastroflix.vercel.app/)
+[Acesse aqui o website](https://gastroflix.vercel.app/).
 
 Inspirado no projeto desenvolvido durante a **Imersão React**, evento realizado pela [Alura](https://www.alura.com.br/), **Gastroflix** é uma plataforma que permite ao usuário guardar e exibir seus vídeos e canais culinários favoritos do YouTube.
 
